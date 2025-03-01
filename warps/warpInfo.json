@@ -1,0 +1,9 @@
+{
+  "name": "DrawDash",
+  "title": "DrawDash: AI Art Game",
+  "description": "An on-chain AI art game where players draw images based on AI-generated references and earn rewards based on their performance.",
+  "txHash": "6a55275f4e074faaf4e2a904d44659cc6187fb075530f43148592f5d22dd2c4f",
+  "alias": "drawdash",
+  "link": "https://devnet.usewarp.to/drawdash",
+  "deployedAt": "2025-03-01T10:22:13.208Z"
+}

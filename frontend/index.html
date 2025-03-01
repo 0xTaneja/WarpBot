@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrawDash - Drawing Canvas Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .canvas-container {
+            margin: 20px 0;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            min-height: 100px;
+        }
+        .preview-image {
+            max-width: 100%;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DrawDash - Drawing Canvas Demo</h1>
+        
+        <div class="canvas-container" id="drawing-canvas-container"></div>
+        
+        <div class="button-container">
+            <button id="save-button">Save Drawing</button>
+            <button id="clear-button">Clear Canvas</button>
+            <button id="submit-button">Submit Drawing</button>
+        </div>
+        
+        <div class="result-container">
+            <h2>Drawing Preview</h2>
+            <div id="preview-container"></div>
+        </div>
+    </div>
+
+    <script src="../frontend/DrawingCanvas.js"></script>
+    <script>
+        // Initialize the drawing canvas
+        const drawingCanvas = new DrawingCanvas('drawing-canvas-container', {
+            width: 600,
+            height: 400,
+            lineWidth: 5,
+            lineColor: '#000000',
+            backgroundColor: '#ffffff',
+            toolbarPosition: 'top',
+            showToolbar: true,
+            showClearButton: true,
+            showColorPicker: true,
+            showSizeSlider: true,
+            showUndoButton: true,
+            showRedoButton: true,
+            showSaveButton: false, // We'll use our own save button
+            onSave: (dataURL) => {
+                console.log('Drawing saved:', dataURL);
+                displayPreview(dataURL);
+            },
+            onClear: () => {
+                console.log('Canvas cleared');
+                clearPreview();
+            }
+        });
+
+        // Get the buttons
+        const saveButton = document.getElementById('save-button');
+        const clearButton = document.getElementById('clear-button');
+        const submitButton = document.getElementById('submit-button');
+
+        // Add event listeners
+        saveButton.addEventListener('click', () => {
+            const dataURL = drawingCanvas.save();
+            displayPreview(dataURL);
+        });
+
+        clearButton.addEventListener('click', () => {
+            drawingCanvas.clear();
+            clearPreview();
+        });
+
+        submitButton.addEventListener('click', () => {
+            const dataURL = drawingCanvas.getDrawingData();
+            submitDrawing(dataURL);
+        });
+
+        // Function to display the drawing preview
+        function displayPreview(dataURL) {
+            const previewContainer = document.getElementById('preview-container');
+            
+            // Clear the preview container
+            previewContainer.innerHTML = '';
+            
+            // Create an image element
+            const img = document.createElement('img');
+            img.src = dataURL;
+            img.alt = 'Drawing Preview';
+            img.className = 'preview-image';
+            
+            // Append the image to the preview container
+            previewContainer.appendChild(img);
+        }
+
+        // Function to clear the drawing preview
+        function clearPreview() {
+            const previewContainer = document.getElementById('preview-container');
+            previewContainer.innerHTML = '<p>No drawing to preview</p>';
+        }
+
+        // Function to submit the drawing to the server
+        function submitDrawing(dataURL) {
+            // In a real application, you would send the drawing to the server
+            console.log('Submitting drawing to server:', dataURL.substring(0, 50) + '...');
+            
+            // Simulate a server response
+            setTimeout(() => {
+                alert('Drawing submitted successfully!');
+            }, 1000);
+        }
+
+        // Initialize the preview container
+        clearPreview();
+    </script>
+</body>
+</html> 

@@ -1,0 +1,36 @@
+{
+  "name": "drawdash",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node scripts/startServer.js",
+    "test": "node scripts/testWarp.js",
+    "deploy-warp": "node scripts/deployWarp.js"
+  },
+  "keywords": [
+    "multiversx",
+    "warp",
+    "blockchain",
+    "nft",
+    "ai",
+    "drawing",
+    "game"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "DrawDash is an on-chain, AI art game built on MultiversX using Warp Protocol.",
+  "dependencies": {
+    "@multiversx/sdk-core": "^13.17.2",
+    "@multiversx/sdk-network-providers": "^2.9.3",
+    "@multiversx/sdk-wallet": "^4.6.0",
+    "@vleap/warps": "^0.9.10",
+    "axios": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "form-data": "^4.0.2",
+    "ipfs-http-client": "^60.0.1",
+    "multer": "^1.4.5-lts.1"
+  }
+}
